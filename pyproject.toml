@@ -11,6 +11,10 @@ Homepage = "https://github.com/CQCL/QUARK-plugin-quantinuum"
 [project]
 name = "QUARK-plugin-quantinuum"
 dynamic = ["version"]
+authors = [
+    {name = "Etienne Granet", email = "etienne.granet@quantinuum.com"},
+    {name = "Travis Thompson", email = "travis.thompson@quantinuum.com"},
+]
 readme = "README.md"
 requires-python = ">=3.12"
 classifiers = [
