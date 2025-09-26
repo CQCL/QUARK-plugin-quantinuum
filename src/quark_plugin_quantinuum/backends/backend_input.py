@@ -11,19 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from quark.plugin_manager import factory
-
-from quark_plugin_quantinuum.backends.aer_simulator import AerSimulator
-from quark_plugin_quantinuum.free_fermion.free_fermion import FreeFermion
+from dataclasses import dataclass
+from qiskit import QuantumCircuit
 
 
-def register() -> None:
+@dataclass
+class BackendInput:
     """
-    Register all modules exposed to quark by this plugin.
-    For each module, add a line of the form:
-        factory.register("module_name", Module)
-
-    The "module_name" will later be used to refer to the module in the configuration file.
+    Input required for a quantum backend.
     """
-    factory.register("free_fermion", FreeFermion)
-    factory.register("aer_simulator", AerSimulator)
+    circuits: list[QuantumCircuit]
