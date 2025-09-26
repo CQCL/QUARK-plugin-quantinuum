@@ -1,6 +1,8 @@
 from quark.plugin_manager import factory
 
-from quark_plugin_quantinuum.example_module import ExampleModule
+from quark_plugin_quantinuum.simulation.backends.aer_simulator import AerSimulator
+from quark_plugin_quantinuum.simulation.free_fermion.free_fermion import FreeFermion
+
 
 def register() -> None:
     """
@@ -10,4 +12,5 @@ def register() -> None:
 
     The "module_name" will later be used to refer to the module in the configuration file.
     """
-    factory.register("example_module", ExampleModule)
+    factory.register("free_fermion", FreeFermion)
+    factory.register("aer_simulator", AerSimulator)
