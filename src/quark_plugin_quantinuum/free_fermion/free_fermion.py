@@ -7,8 +7,8 @@ import numpy as np
 from quark.core import Core, Data, Result
 from quark.interface_types import Other
 
-from ..backends.backend_input import BackendInput
-from ..backends.backend_result import BackendResult
+from quark_plugin_quantinuum.backends.backend_input import BackendInput
+from quark_plugin_quantinuum.backends.backend_result import BackendResult
 from .free_fermion_helpers import (
     create_circuit,
     exact_values_and_variance,

@@ -1,7 +1,7 @@
 from quark.plugin_manager import factory
 
-from quark_plugin_quantinuum.simulation.backends.aer_simulator import AerSimulator
-from quark_plugin_quantinuum.simulation.free_fermion.free_fermion import FreeFermion
+from quark_plugin_quantinuum.backends.aer_simulator import AerSimulator
+from quark_plugin_quantinuum.free_fermion.free_fermion import FreeFermion
 
 
 def register() -> None:
