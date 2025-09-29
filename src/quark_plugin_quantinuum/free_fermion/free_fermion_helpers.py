@@ -32,7 +32,13 @@ def create_couplings(lx, ly) -> list[list[int]]:
 
     l_tot = lx * ly
     couplings_e: list[list[int]] = []
-    for j in range(l_tot):
+    j_order = []
+    for s1 in [0, 1]:
+        for s2 in [0, 1]:
+            for k in range(ly // 2):
+                for j in range(lx // 2):
+                    j_order.append(2 * j + s1 + (2 * k + s2) * lx)
+    for j in j_order:
         # runs through all the lattice sites. j//Lx is the vertical coordinate
         # (<Ly) and j%Lx the horizontal coordinate (<Lx)
         j_test = (j // lx) % 2 == j % 2
