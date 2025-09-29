@@ -59,7 +59,7 @@ class FreeFermionSolver:
         self.ly = ly
         self.n = n
         self.sig = 1
-        if j < k:
+        if j > k:
             abs_jk = abs(j - k)
             if bound_hor == 1 and abs_jk == lx - 1:
                 self.sig *= -1
@@ -189,7 +189,7 @@ def trotter_step(u, dt: float, lx: int, e: list):
                         sig *= -1
                     # the sequence of H's and Sdg's  are conjugating the central ZZZ rotation
                     # into some rotations like XXY
-                    if (c[3] == 0 and c[0] % 2 == 1 - ind) or (c[3] == 1 and c[0] // lx) % 2 == 1 - ind:
+                    if (c[3] == 0 and c[0] % 2 == 1 - ind) or (c[3] == 1 and (c[0] // lx) % 2 == 1 - ind):
                         # if c is a column (line), apply Y only when the parity of the column (line) is 1-ind.
                         u.sdg(c[0])
                     u.h(c[0])
