@@ -180,34 +180,34 @@ def state_preparation(u, lx: int, ly: int):
             u.s(l + j)
 
 def inverse_state_preparation(u,lx:int,ly:int):
-    L=lx*ly
-    for j in range(L//2): #change of basis of the toric code
-        if((j//(lx//2))%2==1):
-            u.h(L+j)
-            u.sdg(L+j)
-        if((j//(lx//2))%2==0):
-            u.sdg(L+j)
-            u.h(L+j)
-            u.sdg(L+j)
+    l=lx*ly
+    for j in range(l//2): #change of basis of the toric code
+        if (j // (lx // 2))%2==1:
+            u.h(l+j)
+            u.sdg(l+j)
+        if (j // (lx // 2))%2==0:
+            u.sdg(l+j)
+            u.h(l+j)
+            u.sdg(l+j)
 
     for j in list(range(lx//2-1))[::-1]:
         k=lx//2-2-j
-        f1=L+k
-        f2=L+((k//(lx//2))+1)*lx//2+(k%(lx//2))
-        f3=L+((k//(lx//2))+0)*lx//2+(((k%(lx//2))+1)%(lx//2))
-        f4=L+(((k//(lx//2))-1)%ly)*lx//2+(k%(lx//2))
+        f1=l+k
+        f2=l+((k//(lx//2))+1)*lx//2+(k%(lx//2))
+        f3=l+((k//(lx//2))+0)*lx//2+(((k%(lx//2))+1)%(lx//2))
+        f4=l+(((k//(lx//2))-1)%ly)*lx//2+(k%(lx//2))
         u.cx(f1,f3)
         u.cx(f1,f2)
         u.cx(f1,f4)
         u.h(f1)
 
-    for j in list(range(L//2-2*(lx//2)))[::-1]: #toric code ground state preparation on the ancillas
-        if((j//(lx//2))%2==0):
-            k=L//2-2*(lx//2)-j-1
-            f1=L+(k%(L//2))
-            f2=L+((k//(lx//2))+1)*lx//2+(k%(lx//2))
-            f3=L+((k//(lx//2))+1)*lx//2+(((k%(lx//2))+1)%(lx//2))
-            f4=L+((k//(lx//2))+2)*lx//2+(k%(lx//2))
+    for j in list(range(l//2-2*(lx//2)))[::-1]: #toric code ground state preparation on the ancillas
+        if (j // (lx // 2))%2==0:
+            k=l//2-2*(lx//2)-j-1
+            f1=l+(k%(l//2))
+            f2=l+((k//(lx//2))+1)*lx//2+(k%(lx//2))
+            f3=l+((k//(lx//2))+1)*lx//2+(((k%(lx//2))+1)%(lx//2))
+            f4=l+((k//(lx//2))+2)*lx//2+(k%(lx//2))
             u.cx(f1,f4)
             u.cx(f1,f3)
             u.cx(f1,f2)
