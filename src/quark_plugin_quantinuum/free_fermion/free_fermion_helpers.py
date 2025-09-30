@@ -179,6 +179,40 @@ def state_preparation(u, lx: int, ly: int):
             u.h(l + j)
             u.s(l + j)
 
+def inverse_state_preparation(u,lx:int,ly:int):
+    l=lx*ly
+    for j in range(l//2): #change of basis of the toric code
+        if (j // (lx // 2))%2==1:
+            u.h(l+j)
+            u.sdg(l+j)
+        if (j // (lx // 2))%2==0:
+            u.sdg(l+j)
+            u.h(l+j)
+            u.sdg(l+j)
+
+    for j in list(range(lx//2-1))[::-1]:
+        k=lx//2-2-j
+        f1=l+k
+        f2=l+((k//(lx//2))+1)*lx//2+(k%(lx//2))
+        f3=l+((k//(lx//2))+0)*lx//2+(((k%(lx//2))+1)%(lx//2))
+        f4=l+(((k//(lx//2))-1)%ly)*lx//2+(k%(lx//2))
+        u.cx(f1,f3)
+        u.cx(f1,f2)
+        u.cx(f1,f4)
+        u.h(f1)
+
+    for j in list(range(l//2-2*(lx//2)))[::-1]: #toric code ground state preparation on the ancillas
+        if (j // (lx // 2))%2==0:
+            k=l//2-2*(lx//2)-j-1
+            f1=l+(k%(l//2))
+            f2=l+((k//(lx//2))+1)*lx//2+(k%(lx//2))
+            f3=l+((k//(lx//2))+1)*lx//2+(((k%(lx//2))+1)%(lx//2))
+            f4=l+((k//(lx//2))+2)*lx//2+(k%(lx//2))
+            u.cx(f1,f4)
+            u.cx(f1,f3)
+            u.cx(f1,f2)
+            u.h(f1)
+
 
 def trotter_step(u, dt: float, lx: int, e: list):
     for ind2 in [1, 0]:
@@ -231,6 +265,7 @@ def create_circuit(lx: int, ly: int, dt: float, n_trot: int) -> np.array:
         # there is an even number of fermions per face
     for t in range(n_trot):
         trotter_step(u, dt, lx, e)
+    inverse_state_preparation(u,lx,ly)
     u.measure_all()
     return u
 
