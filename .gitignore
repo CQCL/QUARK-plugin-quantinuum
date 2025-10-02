@@ -1,6 +1,5 @@
 # === Custom files ===
 benchmark_runs
-uv.lock
 .idea
 *.pkl
 *.png
@@ -228,6 +227,6 @@ cython_debug/
 *.xdy
 *.xml
 *blx.bib
-.bak 
+.bak
 .mtc
 build/
