@@ -20,4 +20,5 @@ class BackendInput:
     """
     Input required for a quantum backend.
     """
+
     circuits: list[QuantumCircuit]
