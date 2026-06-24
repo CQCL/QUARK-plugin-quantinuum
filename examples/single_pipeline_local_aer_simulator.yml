@@ -2,4 +2,4 @@ plugins: ["quark_plugin_quantinuum"]
 
 pipeline:
   - "free_fermion" : {create_plot: true, output_circuit_type: "qiskit"}
-  - "aer_simulator"
+  - "aer_simulator" : {}
