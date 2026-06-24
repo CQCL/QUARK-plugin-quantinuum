@@ -28,6 +28,7 @@ logger = logging.getLogger()
 
 @dataclass
 class AerSimulator(Core):
+    noise_rate: float = 0.0
     _results: BackendResult | None = field(init=False, default=None)
 
     @override
@@ -49,7 +50,7 @@ class AerSimulator(Core):
             from qiskit_aer.noise import NoiseModel, depolarizing_error
 
             noise_model = NoiseModel()
-            error = depolarizing_error(0.001, 2)
+            error = depolarizing_error(self.noise_rate, 2)
             noise_model.add_all_qubit_quantum_error(
                 error, ["cx", "cy", "cz", "rzz", "rxx", "ryy"]
             )
